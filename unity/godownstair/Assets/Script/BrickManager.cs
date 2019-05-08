@@ -74,7 +74,7 @@ public class BrickManager : MonoBehaviour
     }
     void Update()
     {
-        if (Bricks[0].transform.position.y > 66)
+        if (Bricks[0].transform.position.y > 56)
         {
             CreateNewBrick();
         }
