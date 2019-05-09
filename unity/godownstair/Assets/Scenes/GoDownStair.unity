@@ -415,6 +415,8 @@ MonoBehaviour:
   my_Rigidbody: {fileID: 511452048}
   MoveSpeed: 50
   NowSpeed: 20
+  BrickSting: {fileID: 3604563699099300642, guid: 94f8b2653271a674a960b9a63bb206b4,
+    type: 3}
   Hp: {fileID: 1997851929}
   TotalHp: 5
 --- !u!50 &511452048
@@ -1479,6 +1481,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initposotionY: 0
+  ThisBrick: {fileID: 3604563699099300642, guid: 94f8b2653271a674a960b9a63bb206b4,
+    type: 3}
+  BrickType:
+  - {fileID: 21300000, guid: 869a74f8c87c9714e8b85430e80416fc, type: 3}
+  - {fileID: 21300000, guid: 67bf49209ca013c48adecb71e76f4c50, type: 3}
+  - {fileID: 21300000, guid: 4e4d5f511b2f10647a51cdb8e915a7f1, type: 3}
+  - {fileID: 21300000, guid: cab2ef96c7d9d4c4fbb40aa065568af2, type: 3}
   disY: 20
   Bricks: []
   MaxBricks: 8

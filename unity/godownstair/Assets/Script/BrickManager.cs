@@ -5,22 +5,23 @@ using UnityEngine.UI;
 
 public class BrickManager : MonoBehaviour
 {
-    public float initposotionY;
     readonly float leftCreateBorder = -24;
     readonly float rightCreateBorder = 24;
-    string BrickType;
-    static int BrickNumber = -1;
+    public List<Sprite> BrickType;
+    Vector2 BrickVector2 = new Vector2();
     public float disY;
     public List<Transform> Bricks;
-    int TopBrick = 0;
     public int MaxBricks;
+    int TopBrick;
     public Text DisplayCurrentFloor;
 
     void Start()
     {
+        TopBrick = MaxBricks;
         for(int i = 0; i < MaxBricks; i++)
         {
             CreateNewBrick();
+            ChangeSprite(Bricks[i].gameObject,i);
         }
     }
     float NewBrickPositionX()
@@ -35,49 +36,53 @@ public class BrickManager : MonoBehaviour
     {
         if (Bricks.Count == 0)
         {
-            return initposotionY;
+            return 0;
         }
         int lowerIndex = Bricks.Count - 1;
         return Bricks[lowerIndex].transform.position.y - disY;
     }
     void CreateNewBrick()
     {
-        int i = Random.Range(1, 9);
-        if (Bricks.Count == 0)
-        {
-            i = 1;
-        }
-        switch (i)
-        {
-            case 1:case 2:case 3:case 4:case 5:
-                BrickType = "Brick_normal";
-                break;
-            case 6:
-                BrickType = "Brick_left";
-                break;
-            case 7:
-                BrickType = "Brick_right";
-                break;
-            case 8:
-                BrickType = "Brick_sting";
-                break;
-        }
-        GameObject newBrick = Instantiate(Resources.Load<GameObject>(BrickType));
+
+        GameObject newBrick = Instantiate(Resources.Load<GameObject>("Brick"));
         newBrick.transform.position = new Vector2(NewBrickPositionX(), NewBrickPositionY());
         Bricks.Add(newBrick.transform);
-        if (Bricks.Count > MaxBricks)
+    }
+    void ChangeSprite(GameObject ThisBrick, int i)
+    {
+        int j = Random.Range(1, 9);
+        if (i == 0)
         {
-            Destroy(Bricks[0].gameObject);
-            Bricks.RemoveAt(0);
-            TopBrick++;
+            j = 1;
+        }
+        switch (j)
+        {
+            default:
+                ThisBrick.GetComponent<SpriteRenderer>().sprite = BrickType[0];
+                ThisBrick.tag = "Untagged";
+                break;
+            case 6:
+                ThisBrick.GetComponent<SpriteRenderer>().sprite = BrickType[1];
+                ThisBrick.tag = "Brick_left";
+                break;
+            case 7:
+                ThisBrick.GetComponent<SpriteRenderer>().sprite = BrickType[2];
+                ThisBrick.tag = "Brick_right";
+                break;
+            case 8:
+                ThisBrick.GetComponent<SpriteRenderer>().sprite = BrickType[3];
+                ThisBrick.tag = "Brick_sting";
+                break;
         }
     }
     void Update()
     {
-        if (Bricks[0].transform.position.y > 56)
+        if (Bricks[TopBrick % MaxBricks].transform.position.y > 56)
         {
-            CreateNewBrick();
+            Bricks[TopBrick % MaxBricks].transform.position = new Vector2(NewBrickPositionX(), Bricks[(TopBrick - 1) % MaxBricks].transform.position.y - disY);
+            ChangeSprite(Bricks[TopBrick % MaxBricks].gameObject,1);
+            TopBrick++;
         }
-        DisplayCurrentFloor.text = "地下" + ((TopBrick / MaxBricks) + 1) + "樓";
+        DisplayCurrentFloor.text = "地下" + (TopBrick / MaxBricks) + "樓";
     }
 }

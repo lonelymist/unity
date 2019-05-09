@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/GoDownStair.unity
-    guid: de5bafda14677f547aaf06b3aa2cfa63
   m_configObjects: {}

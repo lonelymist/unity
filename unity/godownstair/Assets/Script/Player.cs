@@ -55,9 +55,8 @@ public class Player : MonoBehaviour
 
         Vector2 now_Velocity = new Vector2();
         now_Velocity = my_Rigidbody.velocity;
-        now_Velocity.x = MoveSpeed * input_x;
+        now_Velocity.x = MoveSpeed * input_x + NowSpeed * Time.deltaTime * 50;
         my_Rigidbody.velocity = now_Velocity;
-        transform.Translate(NowSpeed * Time.deltaTime,0, 0);
 
         Hp.text = "血量:" + CurrentHp;
         if (CurrentHp == 0)
