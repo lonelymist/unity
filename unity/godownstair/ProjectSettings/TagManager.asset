@@ -8,6 +8,7 @@ TagManager:
   - Brick_right
   - Brick_sting
   - used_Brick_sting
+  - Brick_spring
   layers:
   - Default
   - TransparentFX

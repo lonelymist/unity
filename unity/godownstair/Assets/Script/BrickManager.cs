@@ -11,6 +11,7 @@ public class BrickManager : MonoBehaviour
     Vector2 BrickVector2 = new Vector2();
     public float disY;
     public List<Transform> Bricks;
+    public List<PhysicsMaterial2D> BrickSpring;
     public int MaxBricks;
     int TopBrick;
     public Text DisplayCurrentFloor;
@@ -43,18 +44,18 @@ public class BrickManager : MonoBehaviour
     }
     void CreateNewBrick()
     {
-
         GameObject newBrick = Instantiate(Resources.Load<GameObject>("Brick"));
         newBrick.transform.position = new Vector2(NewBrickPositionX(), NewBrickPositionY());
         Bricks.Add(newBrick.transform);
     }
     void ChangeSprite(GameObject ThisBrick, int i)
     {
-        int j = Random.Range(1, 9);
+        int j = Random.Range(1, 10);
         if (i == 0)
         {
             j = 1;
         }
+        ThisBrick.GetComponent<BoxCollider2D>().sharedMaterial = BrickSpring[0];
         switch (j)
         {
             default:
@@ -72,6 +73,11 @@ public class BrickManager : MonoBehaviour
             case 8:
                 ThisBrick.GetComponent<SpriteRenderer>().sprite = BrickType[3];
                 ThisBrick.tag = "Brick_sting";
+                break;
+            case 9:
+                ThisBrick.GetComponent<SpriteRenderer>().sprite = BrickType[4];
+                ThisBrick.GetComponent<BoxCollider2D>().sharedMaterial = BrickSpring[1];
+                ThisBrick.tag = "Brick_spring";
                 break;
         }
     }
