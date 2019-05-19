@@ -89,6 +89,9 @@ public class BrickManager : MonoBehaviour
             ChangeSprite(Bricks[TopBrick % MaxBricks].gameObject,1);
             TopBrick++;
         }
-        DisplayCurrentFloor.text = "地下" + (TopBrick / MaxBricks) + "樓";
+        if (!Player.isDead)
+        {
+            DisplayCurrentFloor.text = "地下" + (TopBrick / MaxBricks) + "樓";
+        }
     }
 }
