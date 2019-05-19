@@ -11,4 +11,5 @@ public class DeadZone : MonoBehaviour
             Player.isDead = true;
         }
     }
+    // 如果角色碰到就死亡
 }
