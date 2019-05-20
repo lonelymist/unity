@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
     int CurrentHp;
     // 設定目前血量
 
+    int CheckHp = 0;
+    // 偵測是否要回血
+
     void Start()
     {
         onMoveBrick = false;
@@ -78,6 +81,19 @@ public class Player : MonoBehaviour
             // 離開輸送帶 將值改false
         }
     }
+    void heal()
+        // 下面會用到的回血函數
+    {
+        CheckHp--;
+        // 回復為可回血狀態
+
+        CurrentHp++;
+        // 血量+1
+
+        CancelInvoke("heal");
+        // 取消持續觸發此函數
+
+    }
     void Update()
     {
         input_x = Input.GetAxis("Horizontal");
@@ -93,11 +109,13 @@ public class Player : MonoBehaviour
         {
             now_Velocity.x = MoveSpeed * input_x + Speed * Time.deltaTime * 50;
             // 如果在輸送帶上 就將影響速度加在當前速度上
+
         }
         else
         {
             now_Velocity.x = MoveSpeed * input_x;
             // 如果無 就只看玩家鍵盤輸入的左右
+
         }
         my_Rigidbody.velocity = now_Velocity;
         // 將剛設定好的速度替換到角色剛體上
@@ -105,6 +123,15 @@ public class Player : MonoBehaviour
         Hp.text = "血量:" + CurrentHp;
         // 設定血量的Text
 
+        if ( CurrentHp < TotalHp & CheckHp == 0)
+            // 當血量低於最大血量 且 偵測可回血時
+        {
+            CheckHp++;
+            // 變更為不能回血的狀態
+
+            InvokeRepeating("heal", 5, 5);
+            // 呼叫回血函數 (每5秒觸發一次)
+        }
         if (CurrentHp == 0)
         {
             Player.isDead = true;

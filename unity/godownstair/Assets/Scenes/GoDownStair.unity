@@ -402,7 +402,7 @@ MonoBehaviour:
   MoveSpeed: 50
   Speed: 20
   Hp: {fileID: 1997851929}
-  TotalHp: 5
+  TotalHp: 3
 --- !u!50 &511452048
 Rigidbody2D:
   serializedVersion: 4
@@ -897,7 +897,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 368}
-  m_SizeDelta: {x: 130, y: 22}
+  m_SizeDelta: {x: 130, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1517742650
 MonoBehaviour:
